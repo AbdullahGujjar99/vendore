@@ -67,7 +67,7 @@ class _EarningScreenState extends State<EarningScreen> {
               ],
             ),
           ),
-          Positioned(top: 200,
+          Positioned(top: 235,
             child: Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,

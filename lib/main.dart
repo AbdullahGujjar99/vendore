@@ -1,8 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vendorapp/Screens/HomeScreen.dart';
 import 'AppColors.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+import 'Screens/SettingScreens/LogoutScreen.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -38,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomRight,
@@ -54,24 +60,35 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('images/Layer 1.png'),
-              Text('NICTUS', style: TextStyle(fontFamily: 'poppins', fontSize: 26),),
-              Text('E C O M M E R C E', style: TextStyle(fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite),),
+              const Text('NICTUS', style: TextStyle(fontFamily: 'poppins', fontSize: 26),),
+              const Text('E C O M M E R C E', style: TextStyle(fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite),),
               SizedBox(height: MediaQuery.of(context).size.height*.1,),
               Image.asset('images/midleimg.png'),
               SizedBox(height: MediaQuery.of(context).size.height*.04,),
-              Text('RIDER APP', style: TextStyle(fontFamily: 'poppins',fontSize: 31, fontWeight: FontWeight.bold),),
+              const Text('RIDER APP', style: TextStyle(fontFamily: 'poppins',fontSize: 31, fontWeight: FontWeight.bold),),
               SizedBox(height: MediaQuery.of(context).size.height*.01,),
               const Text('A reliable, easy courier experience is what \n you need to excel in today\'s marketplace',
                 style: TextStyle(fontFamily: 'poppins',fontSize: 12),),
               SizedBox(height: MediaQuery.of(context).size.height*.07,),
               MaterialButton(color: Colors.white,
-              onPressed: (){
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => HomeScreen()),
-                        (route) => false
-                );
-              }, child: Text('Continue', style: TextStyle(fontFamily: 'poppins',fontSize: 13, fontWeight: FontWeight.w500, color: Colors.blue),),
+              onPressed: ()async {
+                print(FirebaseAuth.instance.currentUser);
+                if(FirebaseAuth.instance.currentUser != null){
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen()),
+                          (route) => false
+                  );
+                }
+                else{
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => LogOut()),
+                          (route) => false
+                  );
+                }
+
+              }, child: const Text('Continue', style: TextStyle(fontFamily: 'poppins',fontSize: 13, fontWeight: FontWeight.w500, color: Colors.blue),),
               )
 
             ],

@@ -1,19 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../AppColors.dart';
-import '../HomeScreen.dart';
-import 'SignUp.dart';
-
-class LogOut extends StatefulWidget {
-  const LogOut({Key? key}) : super(key: key);
+import 'package:firebase_auth/firebase_auth.dart';
+import 'LogoutScreen.dart';
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  _LogOutState createState() => _LogOutState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LogOutState extends State<LogOut> {
+class _SignUpState extends State<SignUp> {
   bool icon = true;
+  String? name;
   String? email;
   String? password;
   @override
@@ -29,8 +27,35 @@ class _LogOutState extends State<LogOut> {
               children: [
                 Image.asset("images/sapiens.png"),
                 SizedBox(height: 40,),
-                Text('Welcome Back 😃',
+                const Text('Welcome To SignUp',
                   style: TextStyle(fontFamily: 'poppins',fontSize: 22, color: AppColors.kBlack, fontWeight: FontWeight.bold),),
+                SizedBox(height: 10,),
+                TextFormField(
+                    onChanged: (value){
+                      setState(() {
+                        name = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Enter User Name",labelStyle: TextStyle(color: AppColors.kBlack, fontSize: 15,fontWeight: FontWeight.w600),
+                      suffixIcon: Icon(Icons.person, color: AppColors.kBlueText,),
+                      fillColor: Colors.white,
+                      filled: true,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          color: AppColors.kBlue,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          color: AppColors.kBlue,
+                          width: 2.0,
+                        ),
+                      ),
+                    )
+                ),
                 SizedBox(height: 10,),
                 TextFormField(
                     onChanged: (value){
@@ -60,11 +85,11 @@ class _LogOutState extends State<LogOut> {
                 ),
                 SizedBox(height: 10,),
                 TextFormField(
-                    onChanged: (value){
-                      setState(() {
-                        password = value;
-                      });
-                    },
+                  onChanged: (value){
+                    setState(() {
+                      password = value;
+                    });
+                  },
                     obscureText: icon,
                     decoration: InputDecoration(
                       labelText: "Password",labelStyle: TextStyle(color: AppColors.klightBlue, fontSize: 15,fontWeight: FontWeight.w600),
@@ -78,41 +103,51 @@ class _LogOutState extends State<LogOut> {
                       filled: true,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: AppColors.kBlue,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: AppColors.kBlue,
                           width: 2.0,
                         ),
                       ),
                     )
                 ),
-                SizedBox(height: 50,),
+                const SizedBox(height: 50,),
                 MaterialButton(
                   height: 40,
                   minWidth: 265,
                   color: AppColors.kBlueText,
                   onPressed: ()async{
+                    print(email);
+                    print(password);
                     try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      UserCredential result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
                           email: email!,
-                          password: password!
+                          password: password!,
                       );
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                      User? user = result.user;
+                      print('user: $user');
+                      user?.updateDisplayName(name);
+                      print('name added');
+                      //return _user(user);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LogOut()));
                     } on FirebaseAuthException catch (e) {
-                      if (e.code == 'user-not-found') {
-                        print('No user found for that email.');
-                      } else if (e.code == 'wrong-password') {
-                        print('Wrong password provided for that user.');
+                      print(e);
+                      if (e.code == 'weak-password') {
+                        print('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        print('The account already exists for that email.');
                       }
+                    } catch (e) {
+                      print(e);
                     }
-
+                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>LogOut()));
                   },
-                  child: Text('Login',
+                  child: Text('SignUp',
                     style: TextStyle(fontFamily: 'poppins',fontSize: 15, color: AppColors.kWhite, fontWeight: FontWeight.bold),),
                 ),
                 Row(
@@ -121,11 +156,10 @@ class _LogOutState extends State<LogOut> {
                     Text('Don\'t have an account?',
                       style: TextStyle(fontFamily: 'poppins',fontSize: 14, color: AppColors.kBlack, fontWeight: FontWeight.w500),),
                     TextButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LogOut()));
                     },
-                      child: Text('SignUp',
-                      style: TextStyle(fontFamily: 'poppins',fontSize: 14, fontWeight: FontWeight.w500),),)
+                      child: Text('LogIn',
+                        style: TextStyle(fontFamily: 'poppins',fontSize: 14, fontWeight: FontWeight.w500),),)
                   ],
                 )
               ],

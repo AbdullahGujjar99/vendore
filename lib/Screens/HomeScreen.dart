@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vendorapp/AppColors.dart';
@@ -11,6 +12,7 @@ import 'SettingScreens/HelpCenterScreen.dart';
 import 'SettingScreens/LogoutScreen.dart';
 import 'SettingScreens/PrivacyPolicy.dart';
 import 'SettingScreens/ProfileScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 enum WidgetMaker{
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   WidgetMaker selectedWidget = WidgetMaker.all;
 
   bool isSwitched = false;
+  var user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('John Doe',
+                      Text(user?.displayName as String,
                           style: TextStyle(fontFamily: 'poppins',fontSize: 16, color: AppColors.kBlueText, fontWeight: FontWeight.w700)),
-                  Text('johndoe12@gmail.com',
+                  Text(user?.email as String,
                       style: TextStyle(fontFamily: 'poppins',fontSize: 12, color: AppColors.kLightBlackOPC, fontWeight: FontWeight.w700)),
                     ],
                   )
@@ -140,7 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 ),
                 SizedBox(height: 30,),
-                DrawerButtonsWidget(onpress: () {
+                DrawerButtonsWidget(onpress: () async {
+                  await FirebaseAuth.instance.signOut();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogOut()));
                 }, icon: 'images/logout.png', text: 'Logout',),
                 Padding(

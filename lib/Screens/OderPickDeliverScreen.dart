@@ -120,86 +120,95 @@ class _OderPickDeliverScreenState extends State<OderPickDeliverScreen> {
                   color: AppColors.kWhite,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 20,top: 34),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Order Detail',
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0, right: 20, top: 35),
+                        child: Text('Order Detail',
                             style: TextStyle(fontFamily: 'poppins',fontSize: 18, color: AppColors.kBlack, fontWeight: FontWeight.bold)),
-                        SizedBox(height: 26,),
-                    OrderPickDeliverScreenWidget(isDliever: isDeliver,),
-                        //PendingScreenDetailWidget(isVisible: isVisible,),
-                        Container(
-                          height: 300,
-                          width: MediaQuery.of(context).size.width,
+                      ),
+                      SizedBox(height: 26,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20,),
+                    child: OrderPickDeliverScreenWidget(isDliever: isDeliver,),
+                  ),
+                      //PendingScreenDetailWidget(isVisible: isVisible,),
+                      Container(
+                        padding: const EdgeInsets.only(left: 25.0, right: 25),
+                        height: 300,
+                        width: MediaQuery.of(context).size.width,
 
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 34,),
-                              Text('Delivery Status',
-                                  style: TextStyle(
-                                      fontFamily: 'poppins',fontSize: 18, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
-                              SizedBox(height: 20,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.asset('images/delivery.png'),
-                                  SizedBox(width: MediaQuery.of(context).size.width*.1,),
-                                  Visibility(visible:  isDeliver == false,
-                                      child: Image.asset('images/deli2.png')),
-                                  Visibility(visible: isDeliver == true,
-                                      child: Image.asset('images/delidone.png')),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 34,),
+                            Text('Delivery Status',
+                                style: TextStyle(
+                                    fontFamily: 'poppins',fontSize: 18, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
+                            SizedBox(height: 20,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset('images/delivery.png'),
+                                Visibility(visible:  isDeliver == false,
+                                    child: Image.asset('images/deli2.png')),
+                                Visibility(visible: isDeliver == true,
+                                    child: Image.asset('images/delidone.png')),
 
-                                  Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: const [
-                                        Text('Waiting Delivery',
-                                            style: TextStyle(
-                                                fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
-                                        Text('Rider Is Delivering Package',
-                                            style: TextStyle(
-                                                fontFamily: 'poppins',fontSize: 10, color: AppColors.kLightWhite, fontWeight: FontWeight.w500)),
-                                        SizedBox(height: 25,),
-                                        Text('Ready To Ship',
-                                            style: TextStyle(
-                                                fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
-                                        Text('Seller Is Preparing Package',
-                                            style: TextStyle(
-                                                fontFamily: 'poppins',fontSize: 10, color: AppColors.kLightWhite, fontWeight: FontWeight.w500)),
-                                        SizedBox(height: 25,),
-                                        Text('Packaging',
-                                            style: TextStyle(
-                                                fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
-                                        Text('Seller Is Preparing Package',
-                                            style: TextStyle(
-                                                fontFamily: 'poppins',fontSize: 10, color: AppColors.kLightWhite, fontWeight: FontWeight.w500)),
-                                      ]
-                                  )
+                                Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: const [
+                                      Text('Waiting Delivery',
+                                          style: TextStyle(
+                                              fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
+                                      Text('Rider Is Delivering Package',
+                                          style: TextStyle(
+                                              fontFamily: 'poppins',fontSize: 10, color: AppColors.kLightWhite, fontWeight: FontWeight.w500)),
+                                      SizedBox(height: 25,),
+                                      Text('Ready To Ship',
+                                          style: TextStyle(
+                                              fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
+                                      Text('Seller Is Preparing Package',
+                                          style: TextStyle(
+                                              fontFamily: 'poppins',fontSize: 10, color: AppColors.kLightWhite, fontWeight: FontWeight.w500)),
+                                      SizedBox(height: 25,),
+                                      Text('Packaging',
+                                          style: TextStyle(
+                                              fontFamily: 'poppins',fontSize: 14, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
+                                      Text('Seller Is Preparing Package',
+                                          style: TextStyle(
+                                              fontFamily: 'poppins',fontSize: 10, color: AppColors.kLightWhite, fontWeight: FontWeight.w500)),
+                                    ]
+                                )
 
-                                ],
-                              )
-                            ],
-                          ),
+                              ],
+                            )
+                          ],
                         ),
-                        SizedBox(height: 34,),
-                        Text('Products',
+                      ),
+                      SizedBox(height: 34,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0, right: 20,),
+                        child: Text('Products',
                             style: TextStyle(
                                 fontFamily: 'poppins',fontSize: 18, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
-                        Container(
-                          height: MediaQuery.of(context).size.height*.6,
-                          width: MediaQuery.of(context).size.width,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 30,),
-                                Row(
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height*.6,
+                        width: MediaQuery.of(context).size.width,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 30,),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0, right: 20,),
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
@@ -249,8 +258,11 @@ class _OderPickDeliverScreenState extends State<OderPickDeliverScreen> {
                                     )
                                   ],
                                 ),
-                                SizedBox(height: 17,),
-                                Row(
+                              ),
+                              SizedBox(height: 17,),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0, right: 20,),
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
@@ -331,27 +343,27 @@ class _OderPickDeliverScreenState extends State<OderPickDeliverScreen> {
                                     )
                                   ],
                                 ),
-                                Visibility(visible: isDeliver== false,
-                                  child: BottomButton(text: 'Confirm Drop Off', color: AppColors.kBlueText, ontab: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => PickUpMap(isVisible: false, text: 'Confirm Drop Off',
-                                        color: AppColors.kDeliveredDark, appbar: 'Drop Off Address',
-                                      )),
-                                    );
-                                  },),
-                                ),
-                                // Visibility(
-                                //   visible: !isVisible,
-                                //  above button add here later
-                                // ),
-                              ],
-                            ),
+                              ),
+                              Visibility(visible: isDeliver== false,
+                                child: BottomButton(text: 'Confirm Drop Off', color: AppColors.kBlueText, ontab: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => PickUpMap(isVisible: false, text: 'Confirm Drop Off',
+                                      color: AppColors.kDeliveredDark, appbar: 'Drop Off Address',
+                                    )),
+                                  );
+                                },),
+                              ),
+                              // Visibility(
+                              //   visible: !isVisible,
+                              //  above button add here later
+                              // ),
+                            ],
                           ),
                         ),
+                      ),
 
-                      ],
-                    ),
+                    ],
                   ),
                 ),
               ),

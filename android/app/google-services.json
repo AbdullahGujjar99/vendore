@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "253366602627",
+    "project_id": "vendor-3a750",
+    "storage_bucket": "vendor-3a750.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253366602627:android:eb5a5e076cf2bccb8984b6",
+        "android_client_info": {
+          "package_name": "com.example.vendorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253366602627-fnhpatib7dqul03sfp8oqiu3rabfc576.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vendorapp",
+            "certificate_hash": "eee64c22d32da55dd14415d621f5b012a838d189"
+          }
+        },
+        {
+          "client_id": "253366602627-3snmhn0rgil5p9lo5logdn2482i4ootf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB623bljhqaKX5AQGl917gvcmbbmwxZjPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253366602627-3snmhn0rgil5p9lo5logdn2482i4ootf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "253366602627-dtra2151ireen88odj48esju1ca6qtl4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.vendorapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

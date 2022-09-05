@@ -30,39 +30,39 @@ class PendingTopButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(context: context,
-            elevation: 10,
+            isScrollControlled: true,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             ),
             builder: (BuildContext context){
               return SizedBox(
                 height: MediaQuery.of(context).size.height*.6,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(height: height,),
-                      Image.asset('$img'),
-                      SizedBox(height: 17,),
-                      Text('Do you want to',
-                          style: TextStyle(
-                              fontFamily: 'poppins',fontSize: 23, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 17,),
-                      Text('$message',
-                          style: TextStyle(
-                              fontFamily: 'poppins',fontSize: 14, color: color, fontWeight: FontWeight.w600)),
-                      SizedBox(height: (70-53),),
-                      MaterialButton(onPressed: (){
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(height: height,),
+                    Image.asset('$img'),
+                    SizedBox(height: 17,),
+                    Text('Do you want to',
+                        style: TextStyle(
+                            fontFamily: 'poppins',fontSize: 23, color: AppColors.kLightWhite, fontWeight: FontWeight.bold)),
+                    //SizedBox(height: 17,),
+                    Text('$message',
+                        style: TextStyle(
+                            fontFamily: 'poppins',fontSize: 14, color: color, fontWeight: FontWeight.w600)),
+                    GestureDetector(
+                      onTap: (){
                         Navigator.pop(context);
+                        //SECOND SHEET
                         showModalBottomSheet(
-                          context: context,
+                            context: context,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                             ),
-                          builder: (BuildContext context ){
-                            return SizedBox(
-                              height: MediaQuery.of(context).size.height*.6,
-                              child: Center(
+                            builder: (BuildContext context ){
+                              return SizedBox(
+                                height: MediaQuery.of(context).size.height*.6,
+                                width: MediaQuery.of(context).size.width,
                                 child: Column(
                                   children: [
                                     SizedBox(height: height,),
@@ -75,38 +75,34 @@ class PendingTopButton extends StatelessWidget {
                                     Text('$msg2',
                                         style: TextStyle(
                                             fontFamily: 'poppins',fontSize: 14, color: AppColors.klightBlack, fontWeight: FontWeight.w600)),
-                                    SizedBox(height: (70-57),),
                                     MaterialButton(onPressed: onpress,
                                       color: Colors.blue,
                                       child: Text('Ok',
                                         style: TextStyle(fontFamily: 'poppins', fontSize: 15, color: AppColors.kWhite, fontWeight: FontWeight.bold),),
-                                    )
+                                    ),
                                   ],
                                 ),
-                              ),
-                            );
-                          }
+                              );
+                            }
                         );
                       },
-                        height: 67,
-                        minWidth: MediaQuery.of(context).size.width,
-                        child: Container(
-                          height: 67,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: color,
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))),
-                          child: Center(
-                            child: Text('$text',
-                              style: TextStyle(fontFamily: 'poppins', fontSize: 16, color: AppColors.kWhite, fontWeight: FontWeight.bold),),
-                          ),
+                      child: Container(
+                        height: 60,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+                        child: Center(
+                          child: Text('$text',
+                            style: TextStyle(fontFamily: 'poppins', fontSize: 16, color: AppColors.kWhite, fontWeight: FontWeight.bold),),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
               );
-            });
+            }
+            );
       },
       child: Container(
         height: MediaQuery.of(context).size.height*.03,
